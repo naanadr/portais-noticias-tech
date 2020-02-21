@@ -1,5 +1,9 @@
 import scrapy
 
+from portais_tech.items import PortaisTechItem
+from portais_tech.spiders.olhardigital import (get_datetime, get_relacionados,
+                                               get_tags, XPATH)
+
 
 class OlharDigitalSpider(scrapy.Spider):
     name = "olhardigital"
@@ -23,7 +27,7 @@ class OlharDigitalSpider(scrapy.Spider):
 
         for noticia in noticias_url:
             url = response.urljoin(noticia)
-            # TODO
+            yield scrapy.Request(url=url, callback=self.extract_pages_info)
 
         proxima_pagina = response.xpath('//div[@class="paginacao-rapida"]/'
                                         'a/@href').extract_first()
@@ -31,3 +35,18 @@ class OlharDigitalSpider(scrapy.Spider):
             next_url = response.urljoin(proxima_pagina)
             self.log(f'Faz paginação')
             yield scrapy.Request(url=next_url, callback=self.extract_links)
+
+    def extract_pages_info(self, response):
+        self.log(f'Extrai informações da página {response.url}')
+
+        item = PortaisTechItem()
+        item['url'] = response.url
+        item['titulo'] = response.xpath('//div[@class="hdr-meta"]/'
+                                        'h1/text()').extract_first()
+        item['autores'] = response.xpath(XPATH.get(
+            'info_page').format('meta-aut')).extract_first()
+        item['data_publicacao'] = get_datetime(response)
+        item['conteudo_relacionado'] = get_relacionados(response)
+        item['tags'] = get_tags(response)
+
+        yield item

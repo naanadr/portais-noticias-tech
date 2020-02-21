@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "portais-noticias-tech"
+version = "0.1.0"
+description = ""
+authors = ["FernandaSzAdr <fsandrade25@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+scrapy = "^1.8.0"
+
+[tool.poetry.dev-dependencies]
+flake8 = "^3.7.9"
+ipdb = "^0.12.3"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

@@ -47,16 +47,26 @@ Para visualizar os dados persistidos no MongoDB, você precisará ter o [Robo3T]
 
 > O Snap tem um instalar ótimo do Robo3T, dê uma olhada no [link](https://snapcraft.io/robo3t-snap)
 
-3. Execução do script
+### Utilizando Docker
 
-Para realizar a extração das notícias você pode executar cada site de notícia por vez:
+
+## Como executar esse projeto?
+
+Todos os resultados extraídos podem ser vistos e acompanhados no Robo3T.
+
+### Utilizando um Environment
+
+Para realizar a extração das notícias você pode executar cada site de notícia por vez ou executar um script que executará as spiders para você.
+
+1. Execução de spiders separadamente
 
 ```
+$ cd portais_tech
 $ scrapy crawl olhardigital
 $ scrapy crawl techtudo
 ```
 
-Ou executar elas de uma vez, utilizando o script `runspiders.py`:
+2. Execução de todas as spiders de uma vez
 
 ```
 $ cd portais_tech
@@ -65,5 +75,8 @@ $ python runspiders.py
 
 ### Utilizando Docker
 
+Utilizando Docker você só terá a opção de executar todas as spiders de uma vez, dado que o Dockerfile executa o comendo `python runspiders.py`. Sendo assim, você precisará executar:
 
-## Como executar esse projeto?
+```
+$ docker-compose up portais
+```

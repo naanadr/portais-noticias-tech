@@ -57,7 +57,7 @@ ITEM_PIPELINES = {
    'portais_tech.pipelines.PortaisTechPipeline': 300,
 }
 
-MONGODB_SERVER = "localhost"
+MONGODB_SERVER = "db"
 MONGODB_PORT = 27017
 MONGODB_DB = "portaisnoticias"
 MONGODB_COLLECTION = "tech"

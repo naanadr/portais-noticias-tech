@@ -1,13 +1,13 @@
 import pymongo
 
-from scrapy.conf import settings
+from scrapy.utils.project import get_project_settings
 from scrapy.exceptions import DropItem
-from scrapy import log
 
 
 class PortaisTechPipeline(object):
 
     def __init__(self):
+        settings = get_project_settings()
         connection = pymongo.MongoClient(
             settings['MONGODB_SERVER'],
             settings['MONGODB_PORT']
@@ -20,9 +20,10 @@ class PortaisTechPipeline(object):
         for data in item:
             if not data:
                 valid = False
-                raise DropItem(f"Item perdido {data}!")
+                raise DropItem(f'Item perdido {data}!')
         if valid:
-            self.collection.insert(dict(item))
-            log.msg("Notícia adicionada ao MongoDB dataset!",
-                    level=log.DEBUG, spider=spider)
+            if item.get('url') in self.collection.distinct('url'):
+                raise DropItem(f'Item Duplicado {item.get("url")}')
+            else:
+                self.collection.insert(dict(item))
         return item

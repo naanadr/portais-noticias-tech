@@ -5,6 +5,12 @@
 
 Dados obtidos de portais de notícias na área de tecnologia. Foram escolhidos os portais [Olhar Digital](https://olhardigital.com.br/) e [TechTudo](https://www.techtudo.com.br/) como alvos para realizar a extração de notícias relacionadas ao mundo da tecnologia. 
 
+## Tecnologias utilizadas
+* Docker
+* Docker-Compose
+* Python
+* Scrapy
+* MongoDB
 
 ## Índice
 
@@ -49,6 +55,16 @@ Para visualizar os dados persistidos no MongoDB, você precisará ter o [Robo3T]
 
 ### Utilizando Docker
 
+Vamos inicializar tanto o MongoDB quanto o Scrapy, para isso iremos utilizar o [docker-compose.yml](docker-compose.yml) presente no projeto. Como utilizamos o mesmo docker-compose em produção e em desenvolvimento, você precisará mudar no campo `enviroment` essas informações. 
+
+> Caso o `YOUR_ENV` seja `production` ele não irá instalar os pacotes de desenvolvimento configurados no Poetry.
+
+> Lembre-se de ter instalado o docker-compose antes de executar os passos a seguir
+
+```
+$ docker-compose build portais
+```
+
 
 ## Como executar esse projeto?
 
@@ -80,3 +96,10 @@ Utilizando Docker você só terá a opção de executar todas as spiders de uma 
 ```
 $ docker-compose up portais
 ```
+
+ou caso você esteja em ambiente de desenvolvimento:
+
+```
+$ docker-compose run portais
+```
+

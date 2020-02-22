@@ -30,7 +30,8 @@ class OlharDigitalSpider(scrapy.Spider):
             yield scrapy.Request(url=url, callback=self.extract_pages_info)
 
         proxima_pagina = response.xpath('//div[@class="paginacao-rapida"]/'
-                                        'a/@href').extract_first()
+                                        'a[@class="btn-prx"]/'
+                                        '@href').extract_first()
         if proxima_pagina:
             next_url = response.urljoin(proxima_pagina)
             self.log(f'Faz paginação')

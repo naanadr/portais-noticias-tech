@@ -8,17 +8,17 @@ Dados obtidos de portais de notícias na área de tecnologia. Foram escolhidos o
 
 ## Índice
 
-* [Como instalar esse projeto?](como-instalar-esse-projeto?)
-* [Como executar esse projeto?](como-executar-esse-projeto?)
+* [Como instalar esse projeto?](#como-instalar-esse-projeto)
+* [Como executar esse projeto?](#como-executar-esse-projeto)
 
 
 ## Como instalar esse projeto?
 
-Esse projeto possui dois métodos de instalar, o primeiro utilizando um [*enviroment*](#utilizando-um-enviroment) e o segundo utilizando [*docker*](#utilizando-docker).
+Esse projeto possui dois métodos de instalar, o primeiro utilizando um [*environment*](#utilizando-um-environment) e o segundo utilizando [*docker*](#utilizando-docker).
 
 > Ambos os métodos foram testados em um ambiente linux. Mais especificicamente uma distribuição Manjaro de versão 18.1.5.
 
-## Utilizando um enviroment
+### Utilizando um environment
 
 1. Instalação do Poetry
 
@@ -63,5 +63,7 @@ $ cd portais_tech
 $ python runspiders.py
 ```
 
-## Utilizando Docker
+### Utilizando Docker
 
+
+## Como executar esse projeto?

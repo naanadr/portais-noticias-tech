@@ -14,5 +14,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    volumes:
+      - $PWD/portais_tech:/portais_tech
+    environment:
+      - YOUR_ENV=production
+      # - YOUR_ENV=development
     depends_on:
       - db

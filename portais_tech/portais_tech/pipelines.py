@@ -1,6 +1,7 @@
-import json
-import pymongo
 import datetime
+import json
+import os
+import pymongo
 
 from scrapy.exceptions import DropItem
 
@@ -8,12 +9,21 @@ from scrapy.exceptions import DropItem
 class JsonWriterPipeline(object):
 
     def open_spider(self, spider):
-        self.file = open(f'{spider.name}.jl', 'w')
+        if not bool(int(os.environ['USE_JSON'])):
+            self.file = None
+        else:
+            self.file = open(f'{spider.name}.jl', 'w')
 
     def close_spider(self, spider):
-        self.file.close()
+        if not bool(int(os.environ['USE_JSON'])):
+            self.file = None
+        else:
+            self.file.close()
 
     def process_item(self, item, spider):
+        if not bool(int(os.environ['USE_JSON'])):
+            return None
+
         item = dict(item)
         if (isinstance(item.get('data_publicacao'),
                        (datetime.date, datetime.datetime))):

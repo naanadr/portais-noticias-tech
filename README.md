@@ -110,8 +110,11 @@ $ docker-compose run portais
     * Quais pacotes realmente precisam ser instalados?
     * Quais pacotes podem ser removidos apos a instalação das libs utilizadas?
 2. Subir Dockerfile para o EC2 na AWS
-3. Adicionar um pipelene que permitasalvar a extração em um csv
-4. Limpar código
+3. Adicionar um pipelene que permita salvar a extração em um csv
+4. Limpar código:
    * Remover linhas não utilizadas
    * Remover arquivos não utilizados
+5. Adicionar passagem de parâmetro para o usuario escolher:
+   * modo de persistencia de dados
+   * spiders que serão executadas
 

@@ -1,5 +1,6 @@
 import json
 import pymongo
+import datetime
 
 from scrapy.exceptions import DropItem
 
@@ -13,6 +14,11 @@ class JsonWriterPipeline(object):
         self.file.close()
 
     def process_item(self, item, spider):
+        item = dict(item)
+        if (isinstance(item.get('data_publicacao'),
+                       (datetime.date, datetime.datetime))):
+            item['data_publicacao'] = item.get('data_publicacao').isoformat()
+
         line = json.dumps(dict(item)) + "\n"
         self.file.write(line)
         return item

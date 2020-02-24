@@ -2,10 +2,6 @@
 
 FROM python:3.8.1-alpine
 
-ARG YOUR_ENV
-
-ENV YOUR_ENV=${YOUR_ENV}
-
 RUN apk add --no-cache gcc \
     musl-dev python3-dev \
     libffi-dev openssl-dev \
@@ -20,4 +16,4 @@ RUN poetry config virtualenvs.create false \
 
 COPY /portais_tech /portais_tech
 
-CMD ["python", "runspiders.py"]
+ENTRYPOINT python runspiders.py

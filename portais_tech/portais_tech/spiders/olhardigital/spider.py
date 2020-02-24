@@ -34,7 +34,7 @@ class OlharDigitalSpider(scrapy.Spider):
                                         '@href').extract_first()
         if proxima_pagina:
             next_url = response.urljoin(proxima_pagina)
-            self.log(f'Faz paginação')
+            self.log(f'Faz paginação da página {response.url} para {next_url}')
             yield scrapy.Request(url=next_url, callback=self.extract_links)
 
     def extract_pages_info(self, response):

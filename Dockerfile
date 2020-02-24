@@ -1,6 +1,6 @@
-# version 1.0
-
 FROM python:3.8.1-alpine
+
+ARG YOUR_ENV=development
 
 RUN apk add --no-cache gcc \
     musl-dev python3-dev \
@@ -12,7 +12,7 @@ WORKDIR /portais_tech
 COPY poetry.lock pyproject.toml /portais_tech/
 
 RUN poetry config virtualenvs.create false \
-  && poetry install $(test $YOUR_ENV="production" && echo "--no-dev") --no-interaction --no-ansi
+  && poetry install $(test "$YOUR_ENV" = production && echo "--no-dev") --no-interaction --no-ansi
 
 COPY /portais_tech /portais_tech
 

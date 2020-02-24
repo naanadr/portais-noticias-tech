@@ -16,6 +16,7 @@ Dados obtidos de portais de notícias na área de tecnologia. Foram escolhidos o
 
 * [Como instalar esse projeto?](#como-instalar-esse-projeto)
 * [Como executar esse projeto?](#como-executar-esse-projeto)
+* [Ponto de melhorias](#ponto-de-melhorias)
 
 
 ## Como instalar esse projeto?
@@ -102,4 +103,15 @@ ou caso você esteja em ambiente de desenvolvimento:
 ```
 $ docker-compose run portais
 ```
+
+## Ponto de melhorias
+
+1. Limpar comandos executas no Dockerfile
+    * Quais pacotes realmente precisam ser instalados?
+    * Quais pacotes podem ser removidos apos a instalação das libs utilizadas?
+2. Subir Dockerfile para o EC2 na AWS
+3. Adicionar um pipelene que permitasalvar a extração em um csv
+4. Limpar código
+   * Remover linhas não utilizadas
+   * Remover arquivos não utilizados
 

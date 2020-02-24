@@ -54,7 +54,7 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'portais_tech.pipelines.PortaisTechPipeline': 300,
+   'portais_tech.pipelines.MongoPipeline': 300,
 }
 
 MONGODB_SERVER = "db"

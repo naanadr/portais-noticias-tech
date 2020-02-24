@@ -4,7 +4,7 @@ from scrapy.utils.project import get_project_settings
 from scrapy.exceptions import DropItem
 
 
-class PortaisTechPipeline(object):
+class MongoPipeline(object):
 
     def __init__(self):
         settings = get_project_settings()
@@ -16,12 +16,10 @@ class PortaisTechPipeline(object):
         self.collection = db[settings['MONGODB_COLLECTION']]
 
     def process_item(self, item, spider):
-        valid = True
         for data in item:
             if not data:
-                valid = False
                 raise DropItem(f'Item perdido {data}!')
-        if valid:
+        else:
             if item.get('url') in self.collection.distinct('url'):
                 raise DropItem(f'Item Duplicado {item.get("url")}')
             else:

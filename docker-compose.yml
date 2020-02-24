@@ -5,11 +5,8 @@ services:
     image: mongo:latest
     restart: on-failure
     container_name: portais-mongodb
-    expose:
-      - 27017
     ports:
       - 27017:27017
-    command: mongod
   portais:
     build:
       context: .

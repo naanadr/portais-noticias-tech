@@ -9,9 +9,9 @@ XPATH = {
 
 def get_datetime(response):
     data = response.xpath(XPATH.get('info_page').format(
-        'meta-pub-d')).extract_first()
+        'meta-pub-d')).get()
     hora = response.xpath(XPATH.get('info_page').format(
-        'meta-pub-h')).extract_first()
+        'meta-pub-h')).get()
 
     hora = hora.replace('h', ':')
     data_hora = f'{data} {hora}:00'
@@ -21,14 +21,14 @@ def get_datetime(response):
 
 def get_relacionados(response):
     relacionados = response.xpath('//div[@class="mat-txt-links"]/'
-                                  'a/@href').extract()
+                                  'a/@href').getall()
     relacionados = [response.urljoin(rel) for rel in relacionados]
 
     return relacionados
 
 
 def get_tags(response):
-    tags = response.xpath('//div[@class="mat-tags"]/span/text()').extract()
+    tags = response.xpath('//div[@class="mat-tags"]/span/text()').getall()
     tags = [t.lower() for t in tags]
 
     return tags

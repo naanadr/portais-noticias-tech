@@ -1,4 +1,5 @@
 import scrapy
+from scrapy.loader import ItemLoader
 
 from portais_tech.items import PortaisTechItem
 from portais_tech.spiders.olhardigital import (get_datetime, get_relacionados,
@@ -15,14 +16,14 @@ class OlharDigitalSpider(scrapy.Spider):
     def start_site(self, response):
         url_noticia = response.xpath('//nav[@class="mnu-nav"]/ul/li/'
                                      'a[contains(@href, "noticias")]/'
-                                     '@href').extract_first()
+                                     '@href').get()
         self.log('Extrai url da página de notícias')
         url_noticia = response.urljoin(url_noticia)
         yield scrapy.Request(url=url_noticia, callback=self.extract_links)
 
     def extract_links(self, response):
         noticias_url = response.xpath('//div[@class="blk-items"]/'
-                                      'a/@href').extract()
+                                      'a/@href').getall()
         self.log(f'A página {response.url} tem {len(noticias_url)} notícias.')
 
         for noticia in noticias_url:
@@ -31,7 +32,7 @@ class OlharDigitalSpider(scrapy.Spider):
 
         proxima_pagina = response.xpath('//div[@class="paginacao-rapida"]/'
                                         'a[@class="btn-prx"]/'
-                                        '@href').extract_first()
+                                        '@href').get()
         if proxima_pagina:
             next_url = response.urljoin(proxima_pagina)
             self.log(f'Faz paginação da página {response.url} para {next_url}')
@@ -40,14 +41,17 @@ class OlharDigitalSpider(scrapy.Spider):
     def extract_pages_info(self, response):
         self.log(f'Extrai informações da página {response.url}')
 
-        item = PortaisTechItem()
-        item['url'] = response.url
-        item['titulo'] = response.xpath('//div[@class="hdr-meta"]/'
-                                        'h1/text()').extract_first()
-        item['autores'] = response.xpath(XPATH.get(
-            'info_page').format('meta-aut')).extract_first()
-        item['data_publicacao'] = get_datetime(response)
-        item['conteudo_relacionado'] = get_relacionados(response)
-        item['tags'] = get_tags(response)
+        loader = ItemLoader(item=PortaisTechItem(), response=response)
+        loader.add_value('url', response.url)
+        loader.add_xpath('titulo', '//div[@class="hdr-meta"]/h1/text()')
+        loader.add_xpath('autor', XPATH.get('info_page').format('meta-aut'))
+        loader.add_value('data_publicacao', get_datetime(response))
+        loader.add_value('conteudo_relacionado', get_relacionados(response))
+        loader.add_value('tags', get_tags(response))
 
-        yield item
+        if (', ' in response.xpath(XPATH.get('info_page').format(
+                'meta-aut')).get()):
+            loader.add_xpath('revisor', XPATH.get('info_page').format(
+                'meta-aut'))
+
+        yield loader.load_item()

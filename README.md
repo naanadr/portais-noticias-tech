@@ -3,7 +3,7 @@
 [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
 
 
-Dados obtidos de portais de notícias na área de tecnologia. Foram escolhidos os portais [Olhar Digital](https://olhardigital.com.br/) e [TechTudo](https://www.techtudo.com.br/) como alvos para realizar a extração de notícias relacionadas ao mundo da tecnologia. 
+Dados obtidos de portais de notícias na área de tecnologia. Foram escolhidos os portais [Olhar Digital](https://olhardigital.com.br/) e [TecMundo](https://www.tecmundo.com.br/) como alvos para realizar a extração de notícias relacionadas ao mundo da tecnologia. 
 
 ## Tecnologias utilizadas
 * Docker
@@ -29,7 +29,7 @@ Esse projeto possui dois métodos de instalar, o primeiro utilizando um [*enviro
 
 1. Instalação do Poetry
 
-Primeiro você precisará instalar o [Poetry](https://python-poetry.org/), o gerenciador de enviroment utilizado nesse projeto. Para isso execute os passos descritos na [documentação](https://python-poetry.org/docs/). 
+Primeiro você precisará instalar o [Poetry](https://python-poetry.org/), o gerenciador de enviroment utilizado nesse projeto. Para isso execute os passos descritos na [documentação](https://python-poetry.org/docs/).
 
 > A versão utilizada do Poetry foi a 1.0.0
 
@@ -56,7 +56,7 @@ Para visualizar os dados persistidos no MongoDB, você precisará ter o [Robo3T]
 
 ### Utilizando Docker
 
-Vamos inicializar tanto o MongoDB quanto o Scrapy, para isso iremos utilizar o [docker-compose.yml](docker-compose.yml) presente no projeto. Como utilizamos o mesmo docker-compose em produção e em desenvolvimento, você precisará mudar no campo `enviroment` essas informações. 
+Vamos inicializar tanto o MongoDB quanto o Scrapy, para isso iremos utilizar o [docker-compose.yml](docker-compose.yml) presente no projeto. Como utilizamos o mesmo docker-compose em produção e em desenvolvimento, você precisará mudar no campo `enviroment` essas informações.
 
 > Caso o `YOUR_ENV` seja `production` ele não irá instalar os pacotes de desenvolvimento configurados no Poetry.
 
@@ -80,7 +80,7 @@ Para realizar a extração das notícias você pode executar cada site de notíc
 ```
 $ cd portais_tech
 $ scrapy crawl olhardigital
-$ scrapy crawl techtudo
+$ scrapy crawl tecmundo
 ```
 
 2. Execução de todas as spiders de uma vez
@@ -117,4 +117,3 @@ $ docker-compose run portais
 5. Adicionar passagem de parâmetro para o usuario escolher:
    * modo de persistencia de dados
    * spiders que serão executadas
-

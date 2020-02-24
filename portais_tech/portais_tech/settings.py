@@ -12,6 +12,8 @@ TELNETCONSOLE_ENABLED = False
 # Configure item pipelines
 ITEM_PIPELINES = {
    'portais_tech.pipelines.MongoPipeline': 500,
+   'portais_tech.pipelines.JsonWriterPipeline': 800,
+
 }
 
 MONGO_PORT = 27017

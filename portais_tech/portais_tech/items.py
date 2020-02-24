@@ -18,6 +18,10 @@ def get_revisor(value):
     return value
 
 
+def qtd_comentarios(value):
+    return int(value)
+
+
 class PortaisTechItem(scrapy.Item):
     url = scrapy.Field(
         input_processor=TakeFirst(),
@@ -25,6 +29,10 @@ class PortaisTechItem(scrapy.Item):
     )
     titulo = scrapy.Field(
         input_processor=TakeFirst(),
+        output_processor=TakeFirst(),
+    )
+    qtd_comentarios = scrapy.Field(
+        input_processor=MapCompose(qtd_comentarios),
         output_processor=TakeFirst(),
     )
     autor = scrapy.Field(
@@ -39,6 +47,7 @@ class PortaisTechItem(scrapy.Item):
         input_processor=TakeFirst(),
         output_processor=TakeFirst(),
     )
+    referencias = scrapy.Field()
     conteudo_relacionado = scrapy.Field(
         input_processor=MapCompose(get_revisor),
     )

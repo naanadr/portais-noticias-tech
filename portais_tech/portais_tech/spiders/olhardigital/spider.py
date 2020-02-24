@@ -42,16 +42,22 @@ class OlharDigitalSpider(scrapy.Spider):
         self.log(f'Extrai informações da página {response.url}')
 
         loader = ItemLoader(item=PortaisTechItem(), response=response)
+        loader.add_value('spider', self.name)
         loader.add_value('url', response.url)
         loader.add_xpath('titulo', '//div[@class="hdr-meta"]/h1/text()')
         loader.add_xpath('autor', XPATH.get('info_page').format('meta-aut'))
         loader.add_value('data_publicacao', get_datetime(response))
         loader.add_value('conteudo_relacionado', get_relacionados(response))
         loader.add_value('tags', get_tags(response))
+        loader.add_xpath('referencias', '//em/a[@target="_blank"]/@href')
 
         if (', ' in response.xpath(XPATH.get('info_page').format(
                 'meta-aut')).get()):
             loader.add_xpath('revisor', XPATH.get('info_page').format(
                 'meta-aut'))
+
+        # TODO - Corrigir xpath da captura de comentários
+        #loader.add_xpath('qtd_comentarios', '//span/span[@class=" _50f7"]/'
+        #                                    'text()')
 
         yield loader.load_item()

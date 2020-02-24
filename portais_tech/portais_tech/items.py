@@ -19,10 +19,17 @@ def get_revisor(value):
 
 
 def qtd_comentarios(value):
+    if 'comentários' in value:
+        value = value.split(' ')[0]
+
     return int(value)
 
 
 class PortaisTechItem(scrapy.Item):
+    spider = scrapy.Field(
+        input_processor=TakeFirst(),
+        output_processor=TakeFirst(),
+    )
     url = scrapy.Field(
         input_processor=TakeFirst(),
         output_processor=TakeFirst(),

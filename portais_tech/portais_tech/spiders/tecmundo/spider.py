@@ -54,6 +54,7 @@ class TecMundoSpider(scrapy.Spider):
         self.log(f'Extrai informações da página {response.url}')
 
         loader = ItemLoader(item=PortaisTechItem(), response=response)
+        loader.add_value('spider', self.name)
         loader.add_value('url', response.url)
         loader.add_xpath('titulo', '//h1[contains(@class, '
                          '"header__title")]/text()')

@@ -36,19 +36,21 @@ class JsonWriterPipeline(object):
 
 class MongoPipeline(object):
 
-    collection_name = 'tech'
+    mongo_collection = 'tech'
 
-    def __init__(self, mongo_server, mongo_port, mongo_db):
+    def __init__(self, mongo_server, mongo_port, mongo_db, mongo_collection):
         self.mongo_server = mongo_server
         self.mongo_port = mongo_port
         self.mongo_db = mongo_db
+        self.mongo_collection = mongo_collection
 
     @classmethod
     def from_crawler(cls, crawler):
         return cls(
             mongo_server=crawler.settings.get('MONGO_SERVER'),
             mongo_port=crawler.settings.get('MONGO_PORT'),
-            mongo_db=crawler.settings.get('MONGO_DATABASE')
+            mongo_db=crawler.settings.get('MONGO_DATABASE'),
+            mongo_collection=crawler.settings.get('MONGO_COLLECTION'),
         )
 
     def open_spider(self, spider):
@@ -59,12 +61,16 @@ class MongoPipeline(object):
         self.client.close()
 
     def process_item(self, item, spider):
-        collection = self.db[self.collection_name]
+        collection = self.db[self.mongo_collection]
         for data in item:
             if not data:
                 raise DropItem(f'Item perdido {data}!')
         else:
-            if item.get('url') in collection.distinct('url'):
+            distintos = set()
+            for numero in collection.aggregate([{'$group': {'_id': '$url'}}]):
+                distintos.add(numero['_id'])
+
+            if item.get('url') in distintos:
                 raise DropItem(f'Item Duplicado {item.get("url")}')
             else:
                 collection.insert(dict(item))

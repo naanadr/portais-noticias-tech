@@ -3,7 +3,7 @@
 [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
 
 
-Dados obtidos de portais de notícias na área de tecnologia. Foram escolhidos os portais [Olhar Digital](https://olhardigital.com.br/) e [TecMundo](https://www.tecmundo.com.br/) como alvos para realizar a extração de notícias relacionadas ao mundo da tecnologia. 
+Dados obtidos de portais de notícias da área de tecnologia. Foram escolhidos os portais [Olhar Digital](https://olhardigital.com.br/) e [TecMundo](https://www.tecmundo.com.br/) como alvos para realizar a extração de notícias relacionadas ao mundo da tecnologia. 
 
 ## Tecnologias utilizadas
 * Docker
@@ -14,10 +14,33 @@ Dados obtidos de portais de notícias na área de tecnologia. Foram escolhidos o
 
 ## Índice
 
+* [Ferramentas necessárias](#ferramentas-necessárias)
 * [Como instalar esse projeto?](#como-instalar-esse-projeto)
 * [Como executar esse projeto?](#como-executar-esse-projeto)
 * [Pontos de melhorias](docs/pontos-de-melhorias.md)
 * [Análise dos dados](docs/analise-dos-dados.md)
+
+
+## Ferramentas necessárias
+
+1. Docker e Docker-Compose
+
+2. Instalação do MongoDB 
+
+Como nesse projeto persistimos os dados em um banco [MongoDB](https://www.mongodb.com/), você precisará ter ele instalado em sua máquina.
+
+Recomendamos utilizar uma imagem docker para isso.
+
+```
+$ docker pull mongo:latest
+$ docker run -d -p 27017-27019:27017-27019 --name mongodb mongo:latest
+```
+
+3. Instalação do Robo3T
+
+Para visualizar os dados persistidos no MongoDB, você precisará ter o [Robo3T](https://robomongo.org/download) instalado.
+
+> O Snap tem um instalar ótimo do Robo3T, dê uma olhada no [link](https://snapcraft.io/robo3t-snap)
 
 
 ## Como instalar esse projeto?
@@ -34,26 +57,12 @@ Primeiro você precisará instalar o [Poetry](https://python-poetry.org/), o ger
 
 > A versão utilizada do Poetry foi a 1.0.0
 
-Agora que você instalou o projeto corretamente, execute dentro do diretório principal do projeto (/portais-noticias-tech):
+Agora que você instalou o projeto corretamente, execute:
 
 ```
+$ cd portais-noticias-tech/ 
 $ poetry install --no-dev --no-interaction --no-ansi
 ```
-
-2. Instalação do MongoDB e do Robo3T
-
-Como nesse projeto persistimos os dados em um bando [MongoDB](https://www.mongodb.com/), você precisará ter ele instalado em sua máquina. Recomendamos utilizar uma imagem docker para isso.
-
-> Caso você não tenha o Docker instalado na sua máquina, esse será o momento de instalar.
-
-```
-$ docker pull mongo:latest
-$ docker run -d -p 27017-27019:27017-27019 --name mongodb mongo:latest
-```
-
-Para visualizar os dados persistidos no MongoDB, você precisará ter o [Robo3T](https://robomongo.org/download) instalado.
-
-> O Snap tem um instalar ótimo do Robo3T, dê uma olhada no [link](https://snapcraft.io/robo3t-snap)
 
 ### Utilizando Docker
 
@@ -72,7 +81,7 @@ $ docker-compose build portais
 
 Todos os resultados extraídos podem ser vistos e acompanhados no Robo3T.
 
-> Você pode escolher se irá persistir seus dados em um MongoDB ou/e em um arquivo JsonLine. Para isso, escreva em um arquivo .env duas váriaveis: `USE_JSON` e `USE_MONGO`, ambas recebem apenas 0 ou 1.
+> Você pode escolher se irá persistir seus dados em um arquivo JsonLine. Por enquanto o projeto persiste todas as vezes em MongoDB. Para isso, escreva em um arquivo .env a variável `USE_JSON`, que receberá apenas 0 ou 1.
 
 
 ### Utilizando um Environment
@@ -97,12 +106,6 @@ $ python runspiders.py
 ### Utilizando Docker
 
 Utilizando Docker você só terá a opção de executar todas as spiders de uma vez, dado que o Dockerfile executa o comendo `python runspiders.py`. Sendo assim, você precisará executar:
-
-```
-$ docker-compose up portais
-```
-
-ou caso você esteja em ambiente de desenvolvimento:
 
 ```
 $ docker-compose run portais

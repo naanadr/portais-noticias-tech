@@ -7,6 +7,8 @@ services:
     container_name: portais-mongodb
     ports:
       - 27017:27017
+    volumes:
+      - ./data:/data/db
   portais:
     build:
       context: .

@@ -14,11 +14,7 @@ services:
       args:
         # YOUR_ENV: production
         YOUR_ENV: development
-    environment:
-      # Ative para persistir os dados em json
-      - USE_JSON=1  # 0 para False e 1 para True
-      # Ative para persistir os dados em um mongodb
-      - USE_MONGO=1
+    env_file: .env
     volumes:
       - $PWD/portais_tech:/portais_tech
     depends_on:

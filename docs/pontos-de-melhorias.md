@@ -27,3 +27,5 @@ A seguir serão descritos alguns pontos de melhorias para o projeto. Não necess
    * Inserir o Splash no projeto para poder carregar o JS das páginas e poder acessar mais notícias
 
 6. Otimizar XPATHs utilizados nos sites, junto com a otimização de requisições. Dado que em alguns sites é possível chegar em uma mesma página por varíos fluxos. 
+
+7. Adiciona requisição por batches e em paralelo, para otimizar as extrações. Alguns sites tem um tempo de resposta mais lento que outros e isso afeta a velocidade do script. 

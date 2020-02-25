@@ -17,6 +17,7 @@ Dados obtidos de portais de notícias na área de tecnologia. Foram escolhidos o
 * [Como instalar esse projeto?](#como-instalar-esse-projeto)
 * [Como executar esse projeto?](#como-executar-esse-projeto)
 * [Pontos de melhorias](docs/pontos-de-melhorias.md)
+* [Análise dos dados](docs/analise-dos-dados.md)
 
 
 ## Como instalar esse projeto?

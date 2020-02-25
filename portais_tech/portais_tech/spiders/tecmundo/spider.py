@@ -42,11 +42,12 @@ class TecMundoSpider(scrapy.Spider):
         self.log(f'A página {response.url} tem {len(noticias)} notícias.')
 
         for noticia in noticias:
-            yield scrapy.Request(url=noticia, callback=self.extract_pages_info)
+            meta = response.meta
+            meta['callback'] = 'extract_pages_info'
 
-        self.paginacao(response)
+            yield scrapy.Request(url=noticia, meta=meta,
+                                 callback=self.extract_pages_info)
 
-    def paginacao(self, response):
         next_page = response.xpath('//a[contains(@class, '
                                    '"tec--btn tec--btn--lg")]/@href').get()
 

@@ -28,11 +28,13 @@ class OlharDigitalSpider(scrapy.Spider):
 
         for noticia in noticias_url:
             url = response.urljoin(noticia)
-            yield scrapy.Request(url=url, callback=self.extract_pages_info)
 
-        self.paginacao(response)
+            meta = response.meta
+            meta['callback'] = 'extract_pages_info'
 
-    def paginacao(self, response):
+            yield scrapy.Request(url=url, meta=meta,
+                                 callback=self.extract_pages_info)
+
         proxima_pagina = response.xpath('//div[@class="paginacao-rapida"]/'
                                         'a[@class="btn-prx"]/'
                                         '@href').get()

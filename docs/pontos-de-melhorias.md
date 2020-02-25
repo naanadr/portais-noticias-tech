@@ -15,6 +15,7 @@ A seguir serão descritos alguns pontos de melhorias para o projeto. Não necess
  
 3. Refatorar código:
    * Corrigir ativação e desativação de Pipelines
+   * Realizar a extração do contéudo da notícia
 
 4. Adicionar passagem de parâmetro para o usuario escolher:
    * modo de persistencia de dados
@@ -25,7 +26,10 @@ A seguir serão descritos alguns pontos de melhorias para o projeto. Não necess
 5. Utilizar outros sites para realizar extração:
    * A maioria dos sites obversados utilizam JS para carregar mais notícias
    * Inserir o Splash no projeto para poder carregar o JS das páginas e poder acessar mais notícias
+   * Sites que disponibilizem informações sobre o engajamento de suas materias
 
 6. Otimizar XPATHs utilizados nos sites, junto com a otimização de requisições. Dado que em alguns sites é possível chegar em uma mesma página por varíos fluxos. 
 
-7. Adiciona requisição por batches e em paralelo, para otimizar as extrações. Alguns sites tem um tempo de resposta mais lento que outros e isso afeta a velocidade do script. 
+7. Adiciona requisição por batches e em paralelo, para otimizar as extrações. Alguns sites tem um tempo de resposta mais lento que outros e isso afeta a velocidade do script.
+
+

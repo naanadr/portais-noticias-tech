@@ -3,10 +3,23 @@
 1. Limpar comandos executas no Dockerfile
     * Quais pacotes realmente precisam ser instalados?
     * Quais pacotes podem ser removidos apos a instalação das libs utilizadas?
+    
+    > Com isso será possível otimizar o build da imagem. 
+  
 2. Subir Dockerfile para o EC2 na AWS
-3. Limpar código:
-   * Remover linhas não utilizadas
-   * Remover arquivos não utilizados
-5. Adicionar passagem de parâmetro para o usuario escolher:
+    > Ou para o dockerhub, ou seja, disponibilizar ele para outras pessoas e para uso em outros projetos.
+ 
+3. Refatorar código:
+   * Corrigir ativação e desativação de Pipelines
+
+4. Adicionar passagem de parâmetro para o usuario escolher:
    * modo de persistencia de dados
    * spiders que serão executadas
+   
+   > Isso não ocorre hoje quando o usuário executa o script de inicialização das spiders
+
+5. Utilizar outros sites para realizar extração:
+   * A maioria dos sites obversados utilizam JS para carregar mais notícias
+   * Inserir o Splash no projeto para poder carregar o JS das páginas e poder acessar mais notícias
+
+

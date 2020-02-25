@@ -32,14 +32,19 @@ class PortaisTechDownloaderMiddleware(object):
         for numero in collection.aggregate([{'$group': {'_id': '$url'}}]):
             self.urls_distinct.add(numero['_id'])
 
+    """
+        No `process_request` será verificado se a url da requisição já está
+        persistida no banco, caso ela esteja, a requisição será dropada.
+    """
     def process_request(self, request, spider):
-        url = request.url
+        if 'callback' in request.meta.keys():
+            url = request.url
+            if url in self.urls_distinct:
+                raise IgnoreRequest(f'Request ignorada. Url {url} já foi '
+                                    f'utilizada')
+            else:
+                self.urls_distinct.add(url)
 
-        if url in self.urls_distinct:
-            raise IgnoreRequest(f'Request ignorada. Url {url} já foi '
-                                f'utilizada')
-
-        self.urls_distinct.add(url)
         return None
 
     def process_exception(self, request, exception, spider):

@@ -58,7 +58,7 @@ class TecMundoSpider(scrapy.Spider):
         loader.add_value('url', response.url)
         loader.add_xpath('titulo', '//h1[contains(@class, '
                          '"header__title")]/text()')
-        loader.add_xpath('autor', '//a[contains(@class, "author")]/text()')
+        loader.add_xpath('autor', '//div[contains(@class, "author")]/p/a/text()')
         loader.add_value('data_publicacao', get_datetime(response))
         loader.add_xpath('referencias', '//a[@class="tec--badge"]/@href')
         loader.add_xpath('conteudo_relacionado', '//div[contains(@class, '

@@ -8,14 +8,14 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - ./data:/data/db
+      - ./data_mongo:/data/db
   portais:
     build:
       context: .
       dockerfile: Dockerfile
       args:
-        # YOUR_ENV: production
-        YOUR_ENV: development
+        YOUR_ENV: production
+        # YOUR_ENV: development
     env_file: .env
     volumes:
       - $PWD/portais_tech:/portais_tech

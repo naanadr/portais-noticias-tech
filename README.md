@@ -16,7 +16,7 @@ Dados obtidos de portais de notícias na área de tecnologia. Foram escolhidos o
 
 * [Como instalar esse projeto?](#como-instalar-esse-projeto)
 * [Como executar esse projeto?](#como-executar-esse-projeto)
-* [Ponto de melhorias](#ponto-de-melhorias)
+* [Pontos de melhorias](docs/pontos-de-melhorias.md)
 
 
 ## Como instalar esse projeto?
@@ -71,6 +71,9 @@ $ docker-compose build portais
 
 Todos os resultados extraídos podem ser vistos e acompanhados no Robo3T.
 
+> Você pode escolher se irá persistir seus dados em um MongoDB ou/e em um arquivo JsonLine. Para isso, escreva em um arquivo .env duas váriaveis: `USE_JSON` e `USE_MONGO`, ambas recebem apenas 0 ou 1.
+
+
 ### Utilizando um Environment
 
 Para realizar a extração das notícias você pode executar cada site de notícia por vez ou executar um script que executará as spiders para você.
@@ -103,17 +106,3 @@ ou caso você esteja em ambiente de desenvolvimento:
 ```
 $ docker-compose run portais
 ```
-
-## Ponto de melhorias
-
-1. Limpar comandos executas no Dockerfile
-    * Quais pacotes realmente precisam ser instalados?
-    * Quais pacotes podem ser removidos apos a instalação das libs utilizadas?
-2. Subir Dockerfile para o EC2 na AWS
-3. Adicionar um pipelene que permita salvar a extração em um csv
-4. Limpar código:
-   * Remover linhas não utilizadas
-   * Remover arquivos não utilizados
-5. Adicionar passagem de parâmetro para o usuario escolher:
-   * modo de persistencia de dados
-   * spiders que serão executadas

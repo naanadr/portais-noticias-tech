@@ -18,10 +18,10 @@ class PortaisTechDownloaderMiddleware(object):
         return s
 
     def mongo_connection(self, crawler):
-        mongo_server = crawler.settings.get('MONGO_SERVER'),
-        mongo_port = crawler.settings.get('MONGO_PORT'),
+        mongo_server = crawler.settings.get('MONGO_SERVER')
+        mongo_port = crawler.settings.get('MONGO_PORT')
         mongo_db = crawler.settings.get('MONGO_DATABASE')
-        self.mongo_collection = crawler.settings.get('MONGO_COLLECTION'),
+        self.mongo_collection = crawler.settings.get('MONGO_COLLECTION')
 
         self.client = pymongo.MongoClient(mongo_server, mongo_port)
         self.db = self.client[mongo_db]

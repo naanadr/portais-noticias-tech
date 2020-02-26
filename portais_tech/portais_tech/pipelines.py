@@ -12,7 +12,7 @@ class JsonWriterPipeline(object):
         if not bool(int(os.environ['USE_JSON'])):
             self.file = None
         else:
-            self.file = open(f'{spider.name}.jl', 'w')
+            self.file = open(f'./{spider.name}.jl', 'a+')
 
     def close_spider(self, spider):
         if not bool(int(os.environ['USE_JSON'])):

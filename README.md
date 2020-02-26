@@ -17,6 +17,7 @@ Dados obtidos de portais de notícias da área de tecnologia. Foram escolhidos o
 * [Ferramentas necessárias](#ferramentas-necessárias)
 * [Como instalar esse projeto?](#como-instalar-esse-projeto)
 * [Como executar esse projeto?](#como-executar-esse-projeto)
+* [Fluxo de desenvolvimento](docs/fluxo-desenvolvimento.md)
 * [Pontos de melhorias](docs/pontos-de-melhorias.md)
 * [Análise dos dados](docs/analise-dos-dados.md)
 

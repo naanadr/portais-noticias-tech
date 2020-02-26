@@ -47,4 +47,7 @@ A seguir serão descritos alguns pontos de melhorias para o projeto. Não necess
       * Inserir o Splash no projeto para poder carregar o JavaScript das páginas e poder acessar mais notícias
    * Sites que disponibilizem informações sobre o engajamento de suas materias
 
+* Extrair o conteúdo da materia:
 
+   * Utilizar ferramentas de NLP para análisar o conteúdo presente nas materias
+   * Extrair sentimento das materias e comparar com os comentários/engajamento do conteúdo.

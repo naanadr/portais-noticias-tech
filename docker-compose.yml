@@ -8,7 +8,7 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - ./data_mongo:/data/db
+      - mongodata:/data/db
   portais:
     build:
       context: .
@@ -21,3 +21,6 @@ services:
       - $PWD/portais_tech:/portais_tech
     depends_on:
       - db
+
+volumes:
+  mongodata:

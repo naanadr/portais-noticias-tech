@@ -6,6 +6,7 @@ Foi escolhido tecnologias que a desenvolvedora Core desse repositório tem famil
 
 Em alguns casos, como o Docker, contratempos surgiram e dado a boa documentação os contratempos foram possíveis de ser resolvidos. 
 
+
 ## Escolha dos alvos
 
 Para escolher os alvos foi priorizado portais que fornecessem informações (ou que fosse possível descobrir) sobre a quantidade de notícias no portal. Além disso, foi utilizado também como requisito sites que tivessem uma paginação simples, no caso, que não precisassem de javascript para carregar mais notícias no site (como as infinity scroll).
@@ -57,6 +58,15 @@ Outros campos, como por exemplo, o `quantidade de comentários` estão presentes
 
 ## Modo de armazenamento
 
-Para armazenar os dados por default é utilizado o MongoDB, no caso, ainda não foi implementado a funcionalidade que permita desativar o MongoDB. A segunda opção de persistência dos dados, é utilizando Json.
+Para armazenar os dados por default é utilizado o MongoDB, no caso, ainda não foi implementado a funcionalidade que permita desativar o MongoDB. A segunda opção de persistência dos dados é utilizando Json, onde cada spider armazenará seus dados em um json separado.
 
-Não é preciso trabalhar inicialmente com um Json, pois no Notebook de análise dos dados ele faz conexão com o MongoDB da sua máquina.
+Não é preciso trabalhar inicialmente com um Json, pois no Notebook de análise dos dados ele faz conexão com o MongoDB da sua máquina. 
+
+## Análise dos dados
+
+Para facilitar a visualização dos dados foi optado utilizar o Jupyter Notebook, mas também poderia ter feito um script Python para tal. 
+
+O fluxo de análise consiste de carregar em memória os dados presentes no MongoDB ou Json, esses dados serão utilizados para instânciar um objeto DataFrame. Que será utilizado nas análises. 
+
+> Escolheu-se utilizar Pandas, pois a documentação é detalhada e a desenvolvedora possuí experiência. Além do mais, é possível realizar análises e pós-processamento mais facilmente do que trabalhar com json puro.
+

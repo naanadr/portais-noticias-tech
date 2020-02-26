@@ -33,9 +33,7 @@ A seguir serão descritos alguns pontos de melhorias para o projeto. Não necess
 * Refatorar o código:
    
    * Extrair as principais urls, por exemplo, as catégorias principais de um site. Utilizar essas urls para serem start_urls de spiders secundárias, que executaram em paralelo.
-   * Remover captura de urls duplicadas. Dado que em alguns sites com mais de um caminho é possível chegar em uma mesma página.
-      * Otimização de Xpath
-      * Utilização de `set()` para validar a url única
+   * Extrair apenas notícias novas. No caso, parar a execução após X notícias replicadas. Dado que é feito uma verificação antes das requisições, para validar se a url está presente no banco ou não. 
    * Receber como parâmetro o método utilizado para persistir os dados
       * S3 (AWS) e DynamoDB
       * JSON

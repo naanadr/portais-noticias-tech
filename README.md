@@ -26,29 +26,33 @@ Dados obtidos de portais de notícias da área de tecnologia. Foram escolhidos o
 
 1. Docker e Docker-Compose
 
-2. Instalação do MongoDB 
+2. MongoDB 
 
-Como nesse projeto persistimos os dados em um banco [MongoDB](https://www.mongodb.com/), você precisará ter ele instalado em sua máquina.
+  * Instalação
 
-Recomendamos utilizar uma imagem docker para isso.
+    Como nesse projeto persistimos os dados em um banco [MongoDB](https://www.mongodb.com/), você precisará ter ele instalado em sua máquina.
 
-```
-$ docker pull mongo:latest
-$ docker run -d -p 27017-27019:27017-27019 --name mongodb mongo:latest
-```
+    Recomendamos utilizar uma imagem docker para isso.
 
-3. Instalação do Robo3T
+    ```
+    $ docker pull mongo:latest
+    $ docker run -d -p 27017-27019:27017-27019 --name mongodb mongo:latest
+    ```
 
-Para visualizar os dados persistidos no MongoDB, você precisará ter o [Robo3T](https://robomongo.org/download) instalado.
+3. Robo3T
 
-> O Snap tem um instalar ótimo do Robo3T, dê uma olhada no [link](https://snapcraft.io/robo3t-snap)
+  * Instalação
+  
+    Para visualizar os dados persistidos no MongoDB, você precisará ter o [Robo3T](https://robomongo.org/download) instalado.
+
+    > O Snap tem um instalar ótimo do Robo3T, dê uma olhada no [link](https://snapcraft.io/robo3t-snap)
 
 
 ## Como instalar esse projeto?
 
 Esse projeto possui dois métodos de instalar, o primeiro utilizando um [*environment*](#utilizando-um-environment) e o segundo utilizando [*docker*](#utilizando-docker).
 
-> Ambos os métodos foram testados em um ambiente linux. Mais especificicamente uma distribuição Manjaro de versão 18.1.5.
+> Ambos os métodos foram testados em um ambiente linux. Mais especificicamente uma distribuição Manjaro 18.1.5.
 
 ### Utilizando um environment
 
@@ -58,7 +62,7 @@ Primeiro você precisará instalar o [Poetry](https://python-poetry.org/), o ger
 
 > A versão utilizada do Poetry foi a 1.0.0
 
-Agora que você instalou o projeto corretamente, execute:
+Agora que você instalou o Poetry corretamente, execute:
 
 ```
 $ cd portais-noticias-tech/ 
@@ -67,11 +71,11 @@ $ poetry install --no-dev --no-interaction --no-ansi
 
 ### Utilizando Docker
 
-Vamos inicializar tanto o MongoDB quanto o Scrapy, para isso iremos utilizar o [docker-compose.yml](docker-compose.yml) presente no projeto. Como utilizamos o mesmo docker-compose em produção e em desenvolvimento, você precisará mudar no campo `enviroment` essas informações.
+Vamos inicializar tanto o MongoDB (se você inicializou o MongoDB no começo do tutorial, dê stop no container) quanto o Scrapy, para isso iremos utilizar o [docker-compose.yml](docker-compose.yml) presente no projeto. Como utilizamos o mesmo docker-compose em produção e em desenvolvimento, você precisará mudar no campo `enviroment` essas informações.
 
-> Caso o `YOUR_ENV` seja `production` ele não irá instalar os pacotes de desenvolvimento configurados no Poetry.
+> Caso o `YOUR_ENV` seja `production` ele não irá instalar os pacotes de desenvolvimento configurados no Poetry. Para saber mais quais são os pacotes de desenvolvimento, veja o [pyproject.toml](https://github.com/naanadr/portais-noticias-tech/blob/master/pyproject.toml).
 
-> Lembre-se de ter instalado o docker-compose antes de executar os passos a seguir
+> Lembre-se de ter instalado o docker-compose antes de executar os passos a seguir!
 
 ```
 $ docker-compose build portais
